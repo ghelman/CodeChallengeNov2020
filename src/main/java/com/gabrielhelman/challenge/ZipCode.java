@@ -13,7 +13,7 @@ import java.util.Objects;
  */
 public class ZipCode implements Comparable<ZipCode> {
 
-    private Integer code;
+    private final Integer code;
 
     public ZipCode(Integer code) {
         this.code = code;
@@ -22,12 +22,6 @@ public class ZipCode implements Comparable<ZipCode> {
     public Integer getCode() {
         return code;
     }
-
-    private void setCode(Integer code) {
-        this.code = code;
-    }
-
-
 
 
     @Override

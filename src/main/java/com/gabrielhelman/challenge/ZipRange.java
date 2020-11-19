@@ -2,6 +2,9 @@ package com.gabrielhelman.challenge;
 
 import java.util.Objects;
 
+/**
+ * Represents a range of US-style {@code ZipCode}s, as a pair of low and high codes, inclusive..
+ */
 public class ZipRange implements Comparable<ZipRange> {
 
     private final ZipCode low;
@@ -20,36 +23,24 @@ public class ZipRange implements Comparable<ZipRange> {
         return high;
     }
 
-    public boolean contains(int value){
-        return low.getCode() <= value && high.getCode() >= value;
+    public boolean contains(ZipCode value){
+        return low.getCode() <= value.getCode() && high.getCode() >= value.getCode();
     }
 
     public boolean overlap(ZipRange o){
         boolean result = false;
-
-
-        if( insideRange(o.getLow().getCode(), this)
-            || insideRange(o.getHigh().getCode(), this)
-            || insideRange(this.getHigh().getCode(), o)
-            || insideRange(this.getHigh().getCode(), o)
+        if( this.contains(o.getLow())
+                || this.contains(o.getHigh())
+                || o.contains(this.getLow())
+                || o.contains(this.getHigh())
         ){
             result = true;
         }
-
-
         return result;
     }
 
 
-    /**
-     * Checks to see if a value is inside an (inclusive) range.  Extracted here to prevent copy-paste errors in overlap().
-     * @param value
-     * @param range
-     * @return
-     */
-    public boolean insideRange(int value, ZipRange range) {
-        return (value >= range.getLow().getCode() && value <= range.getHigh().getCode());
-    }
+
 
     public ZipRange merge(ZipRange o){
         ZipCode lowest;

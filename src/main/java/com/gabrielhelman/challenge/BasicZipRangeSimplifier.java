@@ -20,43 +20,23 @@ public class BasicZipRangeSimplifier implements ZipRangeSimplifier {
 
     @Override
     public Collection<ZipRange> simplify(Collection<ZipRange> sourceRanges) {
-        List<ZipRange> result = new ArrayList<ZipRange>();
+        List<ZipRange> result = new ArrayList<>();
 
         //first, to make our lives easier, let's sort the incoming list
         List<ZipRange> sorted = sourceRanges.stream().sorted().collect(Collectors.toList());
-        //something that looks like
-            //examine each range
-            //current result range - expand or create new?
-            //there has to be a set theory way to do this
 
-
-
-        ZipRange current = sorted.get(0);
-
-        for (ZipRange z : sorted ) {
-            if(current == null){
-                current = z;
+        //single pass, checking for overlaps
+        ZipRange previous = sorted.get(0);
+        for (ZipRange current : sorted.subList(1, sorted.size()) ) {
+            if( previous.overlap(current) ){
+                previous = previous.merge(current);
             } else {
-                if( current.overlap(z) ){
-                    current = current.merge(z);
-
-                } else {
-                    result.add(current);
-                    current = z;
-                }
+                result.add(previous);
+                previous = current;
             }
         }
-
-
-
-
-
-
-
-
-        result.add(current);
-
-
+        //don't forget about the last one
+        result.add(previous);
 
         return result;
     }

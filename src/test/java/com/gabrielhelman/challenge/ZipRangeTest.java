@@ -18,8 +18,8 @@ public class ZipRangeTest extends TestCase {
     public void testContains() {
 
         ZipRange zr2 = new ZipRange(new ZipCode(94200), new ZipCode(94299));
-        assertTrue(zr2.contains(94201));
-        assertFalse(zr2.contains(42));
+        assertTrue(zr2.contains(new ZipCode(94201)));
+        assertFalse(zr2.contains(new ZipCode(42)));
 
     }
 
