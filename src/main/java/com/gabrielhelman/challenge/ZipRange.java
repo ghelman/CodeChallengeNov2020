@@ -3,55 +3,95 @@ package com.gabrielhelman.challenge;
 import java.util.Objects;
 
 /**
- * Represents a range of US-style {@code ZipCode}s, as a pair of low and high codes, inclusive..
+ * Represents a range of US-style {@code ZipCode}s, as a pair of low and high codes, inclusive.
+ * Once created, {@code ZipRange}s should be treated as immutable.
  */
 public class ZipRange implements Comparable<ZipRange> {
 
+    /**
+     * Low-end of the zip range.
+     */
     private final ZipCode low;
+
+    /**
+     * High end of the zip range.
+     */
     private final ZipCode high;
 
+    /**
+     * Construct a new zip range.
+     *
+     * @param low  low end of the zipcode range.
+     * @param high high end of the zipcode range.
+     */
     public ZipRange(ZipCode low, ZipCode high) {
         this.low = low;
         this.high = high;
     }
 
+    /**
+     * Gets the low end of the zipcode range.
+     *
+     * @return a {@link ZipCode} object representing the low end of the range.
+     */
     public ZipCode getLow() {
         return low;
     }
 
+    /**
+     * Gets the high end of the zipcode range.
+     *
+     * @return a {@link ZipCode} object representing the high end of the range.
+     */
     public ZipCode getHigh() {
         return high;
     }
 
-    public boolean contains(ZipCode value){
+    /**
+     * Checks if a given {@link ZipCode} is within this range.
+     *
+     * @param value a ZipCode to check.
+     * @return {code true} if this range includes the specified range.
+     */
+    public boolean contains(ZipCode value) {
         return low.getCode() <= value.getCode() && high.getCode() >= value.getCode();
     }
 
-    public boolean overlap(ZipRange o){
+    /**
+     * Checks if two {@code ZipRange} objects overlap.
+     *
+     * @param o The other range to check against this one.
+     * @return {@code True} if any part of the two ranges overlap.
+     */
+    public boolean overlap(ZipRange o) {
         boolean result = false;
-        if( this.contains(o.getLow())
+        if (this.contains(o.getLow())
                 || this.contains(o.getHigh())
                 || o.contains(this.getLow())
                 || o.contains(this.getHigh())
-        ){
+        ) {
             result = true;
         }
         return result;
     }
 
-
-
-
-    public ZipRange merge(ZipRange o){
+    /**
+     * Creates a new {@link ZipRange} representing the specified range combined with this one.  Neither that range or
+     * this are mutated.
+     *
+     * @param o The other ZipRange to merge with this one.
+     * @return a new ZipRange, representing the superset of the two ranges.
+     */
+    public ZipRange merge(ZipRange o) {
         ZipCode lowest;
-        if (this.low.getCode() < o.low.getCode()){
+        if (this.low.getCode() < o.low.getCode()) {
             lowest = this.low;
         } else {
             lowest = o.low;
         }
 
         ZipCode highest;
-        if (this.high.getCode() > o.high.getCode()){
+        if (this.high.getCode() > o.high.getCode()) {
             highest = this.high;
         } else {
             highest = o.high;

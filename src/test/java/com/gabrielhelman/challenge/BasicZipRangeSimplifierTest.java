@@ -27,7 +27,7 @@ public class BasicZipRangeSimplifierTest extends TestCase {
 
         ZipRangeSimplifier zrs = new BasicZipRangeSimplifier();
 
-        assertEquals(inputList, zrs.simplify(inputList) );
+        assertEquals(inputList, zrs.simplify(inputList));
 
     }
 
@@ -53,9 +53,7 @@ public class BasicZipRangeSimplifierTest extends TestCase {
 
         ZipRangeSimplifier zrs = new BasicZipRangeSimplifier();
 
-        assertEquals(whatWeWant, zrs.simplify(inputList) );
-
-
+        assertEquals(whatWeWant, zrs.simplify(inputList));
 
 
     }

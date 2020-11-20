@@ -3,26 +3,40 @@ package com.gabrielhelman.challenge;
 import java.util.Objects;
 
 /**
- * Encapsulates a US-style zipcode.
+ * Encapsulates a US-style zipcode. Once created, ZipCode objects should be treated as an immutable.
+ * <p>
+ * Note that this is a ZipCode, not an international Postal Code.
  *
- *
- * Potential Extension points:
- *
- * Adding a ZIP+4 code requires adding a new property and adjusting other methods below.
- *
+ * <p>
+ * <b>Note:</b> In real life, US Zip codes are a 5-digit main code and a 4 digit "plus4" code.
+ * The plus4 value is currently surplus to requirements, and has been left out of this implementation.
+ * Should that no longer be the case, adding a second stored property should be a reasonably trivial exercise.
+ * </p>
  */
 public class ZipCode implements Comparable<ZipCode> {
 
+    /*
+    The core 5-digit code.  This class does no validation on the value, that's assumed to be the responsibility of another class.
+     */
     private final Integer code;
 
+    /**
+     * Construct a new zipcode object.
+     *
+     * @param code the numeric value of this zip code.
+     */
     public ZipCode(Integer code) {
         this.code = code;
     }
 
+    /**
+     * Gets the numeric value of this zip code.
+     *
+     * @return the zip code as an integer.
+     */
     public Integer getCode() {
         return code;
     }
-
 
     @Override
     public int compareTo(ZipCode o) {

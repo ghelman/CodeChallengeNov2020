@@ -2,8 +2,6 @@ package com.gabrielhelman.challenge;
 
 import junit.framework.TestCase;
 
-import java.util.ArrayList;
-
 public class ZipRangeTest extends TestCase {
 
     /*
@@ -12,7 +10,6 @@ public class ZipRangeTest extends TestCase {
     Then the output should be = [94133,94133] [94200,94399]
 
      */
-
 
 
     public void testContains() {
@@ -31,7 +28,7 @@ public class ZipRangeTest extends TestCase {
 
         assertFalse(zr1.overlap(zr2));
 
-        assertTrue( zr2.overlap(zr4) );
+        assertTrue(zr2.overlap(zr4));
 
     }
 

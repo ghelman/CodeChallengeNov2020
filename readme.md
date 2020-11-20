@@ -5,7 +5,7 @@ _Gabriel L Helman_
 _November, 2020_
 
 
-##Challenge Body
+##Challenge Description
 ###BACKGROUND
 Sometimes items cannot be shipped to certain zip codes, and the rules for these restrictions are stored as a series of ranges of 5 digit codes. For example if the ranges are:
 
@@ -47,7 +47,5 @@ Your work will be evaluated against the following criteria:
 - Emphasize clarity of behavior and ease of maintenance over 'clever'
 - Allow for as much future extension as possible
 - Assume this will be folded into a larger library
-
-## Questions
-- will this need to also support Zip+4? Assume it may; use a class to encapsulate a zip code
-- How about non-US zip codes?
+- While requirements don't current call for supporting the Zip9+4, it may do so in the future, use a class to encapsulate a zip code
+- Support for non-US postal codes is out of scopr
